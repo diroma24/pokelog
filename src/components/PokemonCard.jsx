@@ -1,23 +1,46 @@
 import React from "react";
 
-//* Como prop usa pokemonData, donde se guardan los datos de cada pokemon
 export default function PokemonCard({ pokemonData }) {
-  //Si no tiene pokemonData devuelve una tarjeta con el texto "cargando"
-  if (!pokemonData) return <div className="card">Cargando...</div>;
+  // Estado de carga con estilo Tailwind
+  if (!pokemonData) {
+    return (
+      <div className="bg-gray-100 animate-pulse rounded-2xl h-64 w-full flex items-center justify-center text-gray-400 font-medium">
+        Cargando...
+      </div>
+    );
+  }
 
-  //Si tiene dato muestra la infor del pokemon
   return (
-    <div className="card">
-      <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
-      <h2 style={{ textTransform: 'capitalize' }}>{pokemonData.name}</h2>
-      <div className="types-wrapper">
+    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 p-5 text-center transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center">
+      
+      <div className="relative w-32 h-32 mb-4 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-red-50 transition-colors duration-300">
+        <img 
+          src={pokemonData.sprites.front_default} 
+          alt={pokemonData.name} 
+          className="w-28 h-28 object-contain z-10 drop-shadow-md"
+        />
+      </div>
+
+      <h2 className="text-xl font-bold capitalize text-gray-800 mb-2">
+        {pokemonData.name}
+      </h2>
+
+      <div className="flex justify-center gap-2 mb-4">
         {pokemonData.types.map((item, index) => (
-          <span key={index} className={`type-badge ${item.type.name}`}>
+          <span 
+            key={index} 
+            className={`type-${item.type.name} text-white text-[10px] font-black uppercase px-3 py-1 rounded-full shadow-sm tracking-wider`}
+          >
             {item.type.name}
           </span>
         ))}
       </div>
-      <p>ID: {pokemonData.id}</p>
+
+      <div className="mt-auto">
+        <span className="text-xs font-mono font-bold text-gray-400 bg-gray-100 px-3 py-1 rounded-lg">
+          #{pokemonData.id.toString().padStart(3, '0')}
+        </span>
+      </div>
     </div>
   );
 }

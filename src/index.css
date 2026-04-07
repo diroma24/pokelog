@@ -1,203 +1,25 @@
-/* Variables para cumplir con el criterio de diseño consistente */
-:root {
-  --bg-color: #f4f4f4;
-  --card-bg: #ffffff;
-  --primary-color: #ef5350; /* Rojo Pokémon */
-  --text-color: #333;
+@import "tailwindcss";
+
+@theme {
+  --color-pokemon-red: #ef5350;
+  --color-pokemon-dark: #d32f2f;
 }
 
-
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-}
-
-/* Clase para el contenedor de las tarjetas */
-.pokemon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* Clase para tu componente PokemonCard */
-.card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card img {
-  width: 120px;
-  height: 120px;
-}
-
-.load-more-btn {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.1s;
-}
-
-.load-more-btn:hover {
-  background-color: #d32f2f;
-  transform: scale(1.05);
-}
-
-.load-more-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.types-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 5px;
-}
-
-.type-badge {
-  padding: 4px 10px;
-  border-radius: 4px;
-  color: white;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.pagination-container {
-  display: flex;
-  justify-content: center; /* Centra el botón horizontalmente */
-  padding: 40px 0;         /* Da 40px de espacio arriba y ABAJO */
-  width: 100%;             /* Asegura que ocupe todo el ancho para poder centrar */
-}
-
-/* Colores por tipo (Justifica esto en tu memoria como 'Mejora de accesibilidad visual') */
-.grass { background-color: #78C850; }
-.fire { background-color: #F08030; }
-.water { background-color: #6890F0; }
-.bug { background-color: #A8B820; }
-.normal { background-color: #A8A878; }
-.poison { background-color: #A040A0; }
-.electric { background-color: #F8D030; }
-.ground { background-color: #E0C068; }
-.fairy { background-color: #EE99AC; }
-.fighting { background-color: #C03028; }
-.psychic { background-color: #F85888; }
-.rock { background-color: #B8A038; }
-.ghost { background-color: #705898; }
-.ice { background-color: #98D8D8; }
-.dragon { background-color: #7038F8; }
-.flying {background-color: #8ea5db;}
-.steel {background-color: #7c7c75;}
-.dark {background-color: #333;}
-
-/* Estilos para el contenedor principal del Nav */
-.main-nav {
-  background-color: #ffffff; /* Bloque blanco */
-  display: flex;
-  justify-content: center; /* Centra los elementos */
-  align-items: center;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
-  position: sticky; /* Se queda pegado arriba al hacer scroll */
-  top: 0;
-  z-index: 1000;
-  margin-bottom: 20px;
-}
-
-/* Estilos para los enlaces (Link) */
-.main-nav a {
-  color: #333; /* Texto oscuro para que contraste con el blanco */
-  text-decoration: none;
-  font-weight: 600;
-  margin: 0 15px; /* Espaciado entre elementos */
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: all 0.3s ease; /* Animación suave */
-  font-size: 0.95rem;
-}
-
-/* Efecto al pasar el ratón (Hover) */
-.main-nav a:hover {
-  background-color: #f0f0f0; /* Gris muy clarito al pasar el ratón */
-  color: #ef5350; /* Cambia al rojo Pokémon */
-  transform: translateY(-2px); /* Pequeño salto hacia arriba */
-}
-
-/* Estilo especial para cuando un enlace está activo (opcional) */
-.main-nav a.active {
-  color: #ef5350;
-  border-bottom: 2px solid #ef5350;
-}
-
-.search-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-}
-
-.search-form {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.search-form input {
-  padding: 12px 20px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 25px 0 0 25px; /* Redondeado a la izquierda */
-  outline: none;
-  width: 60%;
-  transition: border-color 0.3s;
-}
-
-.search-form input:focus {
-  border-color: #ef5350;
-}
-
-.search-form button {
-  padding: 12px 25px;
-  background-color: #ef5350;
-  color: white;
-  border: none;
-  border-radius: 0 25px 25px 0; /* Redondeado a la derecha */
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.single-result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.error-msg {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 15px;
-  border-radius: 8px;
-  display: inline-block;
-}
+.type-grass { background-color: #78C850; }
+.type-fire { background-color: #F08030; }
+.type-water { background-color: #6890F0; }
+.type-bug { background-color: #A8B820; }
+.type-normal { background-color: #A8A878; }
+.type-poison { background-color: #A040A0; }
+.type-electric { background-color: #F8D030; }
+.type-ground { background-color: #E0C068; }
+.type-fairy { background-color: #EE99AC; }
+.type-fighting { background-color: #C03028; }
+.type-psychic { background-color: #F85888; }
+.type-rock { background-color: #B8A038; }
+.type-ghost { background-color: #705898; }
+.type-ice { background-color: #98D8D8; }
+.type-dragon { background-color: #7038F8; }
+.type-flying { background-color: #8ea5db; }
+.type-steel { background-color: #7c7c75; }
+.type-dark { background-color: #333; }
