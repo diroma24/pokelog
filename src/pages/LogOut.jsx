@@ -9,9 +9,9 @@ export default function Logout() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/home"); 
+      navigate("/"); 
     } catch (error) {
-      console.error("Error signing out:", error);
+      console.error("f", error);
     }
   };
 
@@ -51,7 +51,7 @@ export default function Logout() {
           </button>
           
           <button
-            onClick={() => navigate(-1)} // Vuelve a la página anterior
+            onClick={() => navigate("/")}
             className="w-full bg-white text-gray-400 font-black uppercase tracking-widest py-4 rounded-2xl border border-gray-100 hover:bg-gray-50 transition-all"
           >
             Cancel
