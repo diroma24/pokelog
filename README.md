@@ -1,16 +1,21 @@
-# React + Vite
+## PokeLog Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A specialized web application designed to help trainers track their progress toward completing the Pokédex. It serves as a management tool for inventorying caught Pokémon and planning future captures.
 
-Currently, two official plugins are available:
+## Current Features
+- **Collection Management Prep:** Individual Pokémon pages with specific data needed for hunting and completion.
+- **Modular Component System:** Optimized UI for quick data reference, including Stats, Locations, and Physical Data.
+- **Visual Database:** Full gallery support for every Pokémon, including Shiny variants to help users identify target forms.
+- **Technical Encounter Data:** Direct integration with Location Area endpoints to show exactly where to find missing entries.
+- **Authentication:** Basic Login and Registration interfaces prepared for personalized user profiles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technical Limitations
+- **State Persistence:** The current version does not save the "Caught" or "Wishlist" status after a page refresh (client-side only).
+- **Missing Main Grid:** The global list for marking multiple Pokémon simultaneously is still in development.
+- **No Backend Connection:** User accounts are not yet linked to a database, meaning collection data is not synced across devices.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Future RoadMap
+- **Checklist System:** Implementation of "Caught", "Shiny Caught", and "Living Dex" markers for every entry.
+- **Personal Wishlist:** A dedicated section to track "Most Wanted" Pokémon and pending trades.
+- **Completion Analytics:** Progress bars showing the percentage of Pokédex completion by region or type.
+- **Social Sharing:** Option to generate a public link to show other trainers your current collection or trade needs.
