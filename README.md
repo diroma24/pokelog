@@ -16,6 +16,6 @@ A specialized web application designed to help trainers track their progress tow
 
 ## Future RoadMap
 - **Checklist System:** Implementation of "Caught", "Shiny Caught", and "Living Dex" markers for every entry.
-- **Personal Wishlist:** A dedicated section to track "Most Wanted" Pokémon and pending trades.
+- **Personal Wishlist:** A dedicated section to track wanted Pokémon.
 - **Completion Analytics:** Progress bars showing the percentage of Pokédex completion by region or type.
 - **Social Sharing:** Option to generate a public link to show other trainers your current collection or trade needs.
