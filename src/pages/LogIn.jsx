@@ -9,6 +9,9 @@ export default function LogIn() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const query = new URLSearchParams(window.location.search);
+  const message = query.get("message");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,7 +23,7 @@ export default function LogIn() {
       navigate("/");
     } catch (error) {
       console.error(error.code);
-      if (error.code === 'auth/invalid-credential') {
+      if (error.code === "auth/invalid-credential") {
         alert("Invalid email or password.");
       } else {
         alert("Error: " + error.message);
@@ -45,11 +48,19 @@ export default function LogIn() {
       <h4 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-6 border-b pb-2">
         Log In
       </h4>
-      
+
+      {message === "auth_required" && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-xl text-[11px] font-black text-pokemon-red uppercase text-center tracking-widest">
+          Authentication required to access this area
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Campo correo */}
         <div className="flex flex-col gap-1">
-          <label className="text-[10px] font-black uppercase text-gray-400 ml-1">Email Address</label>
+          <label className="text-[10px] font-black uppercase text-gray-400 ml-1">
+            Email Address
+          </label>
           <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 flex items-center gap-3 focus-within:border-pokemon-red transition-colors">
             <input
               type="email"
@@ -65,7 +76,9 @@ export default function LogIn() {
 
         {/* Campo comtraseña */}
         <div className="flex flex-col gap-1">
-          <label className="text-[10px] font-black uppercase text-gray-400 ml-1">Password</label>
+          <label className="text-[10px] font-black uppercase text-gray-400 ml-1">
+            Password
+          </label>
           <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 flex items-center gap-3 focus-within:border-pokemon-red transition-colors">
             <input
               type="password"
@@ -89,9 +102,9 @@ export default function LogIn() {
             />
             <span className="text-xs font-bold text-gray-500">Remember me</span>
           </label>
-          
-          <button 
-            type="button" 
+
+          <button
+            type="button"
             className="text-xs font-bold text-pokemon-red hover:underline"
             onClick={() => alert("Redirecting to reset password...")}
           >
@@ -104,9 +117,9 @@ export default function LogIn() {
           type="submit"
           disabled={loading}
           className={`w-full text-white font-black uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-all mt-4 ${
-            loading 
-            ? 'bg-gray-300 shadow-none cursor-not-allowed opacity-50' 
-            : 'bg-pokemon-red shadow-red-200 hover:scale-[1.02] active:scale-[0.98]'
+            loading
+              ? "bg-gray-300 shadow-none cursor-not-allowed opacity-50"
+              : "bg-pokemon-red shadow-red-200 hover:scale-[1.02] active:scale-[0.98]"
           }`}
         >
           {loading ? "Signing In..." : "Sign In"}
@@ -127,10 +140,10 @@ export default function LogIn() {
           type="button"
           className="w-full flex items-center justify-center gap-3 border border-gray-100 p-4 rounded-2xl hover:bg-gray-50 transition-all hover:scale-[1.01] active:scale-[0.99] shadow-sm"
         >
-          <img 
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
-            className="w-5 h-5" 
-            alt="Google" 
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            className="w-5 h-5"
+            alt="Google"
           />
           <span className="text-xs font-black text-gray-600 uppercase tracking-wider">
             Sign in with Google
