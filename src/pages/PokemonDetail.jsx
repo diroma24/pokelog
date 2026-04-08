@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import PokemonHeader from "./PokemonHeader";
-import ImageGallery from "./ImageGallery";
-import PhysicalInfo from "./PhysicalInfo";
-import Stats from "./Stats";
-import Locations from "./Locations";
+import PokemonHeader from "../components/PokemonHeader";
+import ImageGallery from "../components/ImageGallery";
+import PhysicalInfo from "../components/PhysicalInfo";
+import Stats from "../components/Stats";
+import Locations from "../components/Locations";
 
 export default function PokemonDetail() {
   const { id } = useParams();

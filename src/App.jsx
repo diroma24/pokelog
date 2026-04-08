@@ -3,7 +3,9 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register"
 import PokemonDetail from "./pages/PokemonDetail";
+import LogIn from "./pages/LogIn";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<LogIn />} />
             <Route path="/pokemon/:id" element={<PokemonDetail />} />
           </Routes>
         </div>

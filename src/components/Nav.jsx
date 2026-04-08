@@ -17,21 +17,21 @@ export default function Nav() {
         onClick={handleInicioClick}
         className="text-gray-700 font-bold hover:text-pokemon-red transition-colors duration-300"
       >
-        Inicio
+        Home
       </Link>
 
       <Link 
         to="/search" 
         className="text-gray-700 font-bold hover:text-pokemon-red transition-colors duration-300"
       >
-        Buscar
+        Search
       </Link>
 
       <Link 
         to="/profile" 
         className="text-gray-700 font-bold hover:text-pokemon-red transition-colors duration-300"
       >
-        Mi perfil
+        My Profile
       </Link>
 
       <a 
@@ -42,6 +42,20 @@ export default function Nav() {
       >
         API Doc
       </a>
+
+      <Link
+        to="/register" 
+        className="bg-pokemon-red hover:bg-pokemon-dark  text-white font-medium transition-colors duration-300 border-l px-3 py-1 rounded-full"  
+      >
+        Create an Account
+      </Link>
+
+      <Link
+        to="/login" 
+        className="bg-white text-gray-400 hover:text-gray-600 shadow-sm border border-gray-200 font-medium transition-colors duration-300 border-l px-3 py-1 rounded-full"  
+      >
+        Log In
+      </Link>
     </nav>
   );
 }

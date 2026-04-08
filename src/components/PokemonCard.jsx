@@ -5,7 +5,7 @@ export default function PokemonCard({ pokemonData }) {
   if (!pokemonData) {
     return (
       <div className="bg-gray-100 animate-pulse rounded-2xl h-64 w-full flex items-center justify-center text-gray-400 font-medium">
-        Cargando...
+        Loading...
       </div>
     );
   }

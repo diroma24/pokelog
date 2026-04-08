@@ -10,7 +10,7 @@ export default function Counter({ count }) {
           <span className="relative inline-flex rounded-full h-3 w-3 bg-pokemon-red"></span>
         </span>
         <p className="text-gray-600 font-bold text-sm">
-          Pokémon cargados:{" "}
+          Loaded Pokémon:{" "}
           <span className="text-pokemon-red text-lg">{count}</span>
         </p>
       </div>
