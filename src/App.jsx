@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register"
 import PokemonDetail from "./pages/PokemonDetail";
 import LogIn from "./pages/LogIn";
+import LogOut from "./pages/LogOut"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<LogIn />} />
+            <Route path="/logout" element={<LogOut />} />
             <Route path="/pokemon/:id" element={<PokemonDetail />} />
           </Routes>
         </div>

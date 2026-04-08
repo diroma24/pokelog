@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { auth, googleProvider } from "../firebase";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -6,19 +9,41 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [terms, setTerms] = useState(false);
   const [privacy, setPrivacy] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleRedirectSim = (page) => {
     alert(`Redirecting to: ${page}...`);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      alert("Passwords do not match.");
       return;
     }
-    console.log("Registering:", { email, password, terms, privacy });
-    alert("Account created for: " + email);
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Account created successfully.");
+      navigate("/"); 
+    } catch (error) {
+      console.error(error.code);
+      alert("Error: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Google login failed");
+    }
   };
 
   return (
@@ -81,7 +106,6 @@ export default function Register() {
 
         {/* Switches Section */}
         <div className="space-y-4 pt-2">
-          {/* Terms Switch */}
           <div className="flex items-center justify-between gap-4">
             <span className="text-xs font-bold text-gray-500">
               I accept the{" "}
@@ -102,7 +126,6 @@ export default function Register() {
             </button>
           </div>
 
-          {/* Privacy Switch */}
           <div className="flex items-center justify-between gap-4">
             <span className="text-xs font-bold text-gray-500">
               Agree to{" "}
@@ -127,16 +150,41 @@ export default function Register() {
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={!terms || !privacy}
+          disabled={!terms || !privacy || loading}
           className={`w-full text-white font-black uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-all mt-4 ${
-            terms && privacy 
+            terms && privacy && !loading
             ? 'bg-pokemon-red shadow-red-200 hover:scale-[1.02] active:scale-[0.98]' 
             : 'bg-gray-300 shadow-none cursor-not-allowed opacity-50'
           }`}
         >
-          Create Account
+          {loading ? "Creating..." : "Create Account"}
         </button>
       </form>
+
+      {/* Social Login Section */}
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="relative flex items-center justify-center">
+          <div className="border-t w-full border-gray-100"></div>
+          <span className="bg-white px-3 text-[10px] text-gray-400 font-black uppercase absolute tracking-widest">
+            Social Signup
+          </span>
+        </div>
+
+        <button
+          onClick={handleGoogleLogin}
+          type="button"
+          className="w-full flex items-center justify-center gap-3 border border-gray-100 p-4 rounded-2xl hover:bg-gray-50 transition-all hover:scale-[1.01] active:scale-[0.99] shadow-sm"
+        >
+          <img 
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+            className="w-5 h-5" 
+            alt="Google" 
+          />
+          <span className="text-xs font-black text-gray-600 uppercase tracking-wider">
+            Sign up with Google
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

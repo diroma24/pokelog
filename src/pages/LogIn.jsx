@@ -1,17 +1,47 @@
 import { useState } from "react";
+import { auth, googleProvider } from "../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", { email, password, rememberMe });
+    setLoading(true);
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+    } catch (error) {
+      console.error(error.code);
+      if (error.code === 'auth/invalid-credential') {
+        alert("Invalid email or password.");
+      } else {
+        alert("Error: " + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Google login failed");
+    }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 px-6 pb-10 bg-white rounded-[2.5rem] shadow-2xl p-10">
+    <div className="max-w-md mx-auto mt-10 px-6 pb-10 bg-white rounded-[2.5rem] shadow-2xl p-10 border border-gray-100">
       <h4 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-6 border-b pb-2">
         Log In
       </h4>
@@ -72,12 +102,41 @@ export default function LogIn() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-pokemon-red text-white font-black uppercase tracking-widest py-4 rounded-2xl shadow-lg shadow-red-200 hover:scale-[1.02] active:scale-[0.98] transition-all mt-4"
-          onClick={() => alert("Logged with email: " +  email + " and password " + password + ".")}
+          disabled={loading}
+          className={`w-full text-white font-black uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-all mt-4 ${
+            loading 
+            ? 'bg-gray-300 shadow-none cursor-not-allowed opacity-50' 
+            : 'bg-pokemon-red shadow-red-200 hover:scale-[1.02] active:scale-[0.98]'
+          }`}
         >
-          Sign In
+          {loading ? "Signing In..." : "Sign In"}
         </button>
       </form>
+
+      {/* Social Login */}
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="relative flex items-center justify-center">
+          <div className="border-t w-full border-gray-100"></div>
+          <span className="bg-white px-3 text-[10px] text-gray-400 font-black uppercase absolute tracking-widest">
+            Social Login
+          </span>
+        </div>
+
+        <button
+          onClick={handleGoogleLogin}
+          type="button"
+          className="w-full flex items-center justify-center gap-3 border border-gray-100 p-4 rounded-2xl hover:bg-gray-50 transition-all hover:scale-[1.01] active:scale-[0.99] shadow-sm"
+        >
+          <img 
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+            className="w-5 h-5" 
+            alt="Google" 
+          />
+          <span className="text-xs font-black text-gray-600 uppercase tracking-wider">
+            Sign in with Google
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
